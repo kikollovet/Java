@@ -18,6 +18,12 @@ public class Principal {
 			
 			System.out.println("Digite o nome:");
 			String nome = entrada.nextLine();
+			
+			while (empresa.usuarioJaCadastrado(nome)){
+				System.out.println("Nome do funcionario já existente. Digite outro nome:");
+				nome = entrada.nextLine();
+			}
+			
 			System.out.println("Digite o cpf:");
 			String cpf = entrada.nextLine();
 			System.out.println("Digite o salário:");
@@ -34,18 +40,27 @@ public class Principal {
 			resposta = entrada.nextLine();
 		}
 		
-		entrada.close();
-		
 		System.out.println("----------------------------------------");
 		System.out.println("Lista dos novos funcionários cadastrados");
 		System.out.println("----------------------------------------\n");
 		
+		System.out.println("Digite enter para continuar\n");
+		entrada.nextLine();
+		
 		for(Funcionario f: empresa.get_listaFuncionarios()){
-			System.out.println("--------------------------");
-			System.out.println("Informações do funcionário");
-			System.out.println("--------------------------");
+			System.out.println("----------------------------");
+			System.out.println("Informações do funcionário " + (empresa.get_listaFuncionarios().indexOf(f) + 1));
+			System.out.println("----------------------------");
 			System.out.println(f);
+			
+			if(empresa.get_listaFuncionarios().size() != (empresa.get_listaFuncionarios().indexOf(f) + 1)){	
+				System.out.println("\nDigite enter para continuar");
+				entrada.nextLine();
+			} else {
+				System.out.println("\nFim da lista de novos funcionários");
+			}
 		}
+		entrada.close();
 		
 	}
 
